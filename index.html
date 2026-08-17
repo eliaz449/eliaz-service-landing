@@ -8,273 +8,463 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=Rubik:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #2563EB; --dark: #1E3A8A; --light: #EFF6FF; }
-        body { font-family: 'Heebo', sans-serif; overflow-x: hidden; color: #334155; }
-        h1,h2,h3,h4 { font-family: 'Rubik', sans-serif; }
-        .btn-primary { background-color: var(--primary); color: white; transition: all 0.3s ease; }
-        .btn-primary:hover { background-color: #1d4ed8; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(37,99,235,0.3); }
-        .form-input { width:100%; padding:0.75rem; border:1px solid #cbd5e1; border-radius:0.5rem; margin-bottom:1rem; transition: border-color 0.2s; }
-        .form-input:focus { outline:none; border-color:var(--primary); }
-        .whatsapp-float { position:fixed; width:60px; height:60px; bottom:30px; left:30px; background:#25d366; color:#fff; border-radius:50px; display:flex; align-items:center; justify-content:center; font-size:28px; box-shadow:2px 2px 8px rgba(0,0,0,0.2); z-index:100; transition:transform 0.3s; text-decoration:none; }
-        .whatsapp-float:hover { transform:scale(1.1); }
-        .card-hover:hover { transform:translateY(-5px); box-shadow:0 20px 25px -5px rgba(0,0,0,0.1); }
-        .blob { position:absolute; filter:blur(40px); z-index:-1; opacity:0.35; }
+        :root {
+            --bg: #05060b;
+            --bg-soft: #0a0d18;
+            --surface: rgba(255,255,255,0.04);
+            --surface-strong: rgba(255,255,255,0.07);
+            --border: rgba(255,255,255,0.10);
+            --text: #eef1fa;
+            --text-dim: #97a1c2;
+            --text-faint: #5c6489;
+            --accent: #6d8bff;
+            --accent2: #22d3ee;
+            --accent3: #a855f7;
+        }
+        * { box-sizing: border-box; }
+        html { background: var(--bg); }
+        body { font-family: 'Heebo', sans-serif; overflow-x: hidden; color: var(--text-dim); background: var(--bg); }
+        h1,h2,h3,h4 { font-family: 'Rubik', sans-serif; color: var(--text); }
+
+        .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent2); }
+        .text-gradient { background: linear-gradient(135deg, #a7b8ff, #22d3ee); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        .card-glass { background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(18px); border-radius: 20px; }
+        .card-glass:hover { border-color: rgba(109,139,255,0.35); }
+
+        .btn-primary { background: linear-gradient(135deg, #7c9bff, #22d3ee); color: #05060b; font-weight: 800; transition: all .25s ease; box-shadow: 0 1px 0 0 rgba(255,255,255,.4) inset, 0 14px 34px -12px rgba(109,139,255,.65); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 1px 0 0 rgba(255,255,255,.5) inset, 0 20px 44px -10px rgba(109,139,255,.8); }
+        .btn-ghost { border: 1px solid var(--border); color: var(--text); background: rgba(255,255,255,.02); transition: all .25s ease; }
+        .btn-ghost:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.25); }
+
+        .form-input { width: 100%; padding: .9rem 1.1rem; border: 1px solid var(--border); border-radius: .75rem; margin-bottom: 1rem; background: rgba(255,255,255,.03); color: var(--text); transition: border-color .2s, box-shadow .2s; }
+        .form-input::placeholder { color: var(--text-faint); }
+        .form-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(109,139,255,.22); }
+
+        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; left: 30px; background: #25d366; color: #fff; border-radius: 50px; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 100; transition: transform .3s; text-decoration: none; animation: wapulse 2.6s infinite; }
+        .whatsapp-float:hover { transform: scale(1.08); }
+        @keyframes wapulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); } 70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+
+        .blob { position: absolute; filter: blur(70px); z-index: 0; mix-blend-mode: screen; }
+
+        .grid-overlay { position: absolute; inset: 0; z-index: 0; opacity: .5;
+            background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size: 44px 44px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 90%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 90%);
+        }
+
+        .icon-badge { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; background: linear-gradient(135deg, rgba(109,139,255,.16), rgba(34,211,238,.12)); border: 1px solid rgba(109,139,255,.32); box-shadow: 0 0 28px -6px rgba(109,139,255,.35); }
+        .badge-fail { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: .95rem; background: rgba(248,113,113,.12); border: 1px solid rgba(248,113,113,.35); color: #fca5a5; flex-shrink: 0; }
+        .badge-check { width: 30px; height: 30px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: .85rem; background: rgba(34,211,238,.14); border: 1px solid rgba(34,211,238,.35); color: #67e8f9; flex-shrink: 0; }
+
+        .tag-pill { display: inline-flex; align-items: center; gap: .4rem; font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .06em; padding: .4rem .8rem; border-radius: 999px; background: rgba(109,139,255,.12); border: 1px solid rgba(109,139,255,.3); color: #c3cdff; }
+
+        /* Flow diagram */
+        .flow-path { fill: none; stroke: #45508c; stroke-width: 2; stroke-dasharray: 7 8; opacity: .9; animation: flowdash 1.3s linear infinite; }
+        @keyframes flowdash { to { stroke-dashoffset: -30; } }
+        .pulse-ring { transform-box: fill-box; transform-origin: 50% 50%; animation: pulsering 2.6s ease-out infinite; }
+        @keyframes pulsering { 0% { opacity: .55; transform: scale(.92); } 100% { opacity: 0; transform: scale(1.6); } }
+        .node-label { font-size: 13px; fill: #8b95bd; font-family: 'Heebo', sans-serif; }
+        .node-label-strong { font-size: 14.5px; fill: #eef1fa; font-weight: 700; font-family: 'Rubik', sans-serif; }
+        .node-label-mono { font-size: 11px; fill: #9db2ff; letter-spacing: 2px; font-family: 'JetBrains Mono', monospace; }
+        .diagram-caption { margin-top: 1.5rem; text-align: center; color: var(--text-faint); font-size: .875rem; max-width: 30rem; margin-inline: auto; }
+
+        /* step track */
+        .step-track { display: flex; align-items: center; justify-content: center; margin-bottom: 2.5rem; }
+        .step-node { width: 46px; height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-family: 'JetBrains Mono', monospace; background: var(--bg-soft); border: 1.5px solid var(--accent); color: #cdd7ff; box-shadow: 0 0 24px -4px rgba(109,139,255,.6); flex-shrink: 0; }
+        .step-line { flex: 1 1 auto; height: 2px; background: linear-gradient(90deg, #6d8bff, #22d3ee); background-size: 200% 100%; animation: linemove 2.5s linear infinite; min-width: 24px; max-width: 140px; margin: 0 .5rem; opacity: .8; }
+        @keyframes linemove { to { background-position: -200% 0; } }
+
+        .mini-flow { display: flex; align-items: center; gap: .5rem; margin-top: 1rem; }
+        .mini-node { display: flex; flex-direction: column; align-items: center; gap: .25rem; font-size: 1.1rem; }
+        .mini-node small { font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--text-faint); letter-spacing: .03em; }
+        .mini-arrow { color: var(--accent2); font-size: 1rem; }
     </style>
 </head>
-<body class="bg-slate-50 antialiased">
+<body class="antialiased">
+
+<!-- NAV -->
+<header class="fixed top-0 inset-x-0 z-50" style="background: rgba(5,6,11,.72); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border);">
+    <div class="container mx-auto px-4 flex items-center justify-between h-16">
+        <a href="#top" class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-black" style="background: linear-gradient(135deg,#7c9bff,#22d3ee); color:#05060b;">L</span>
+            <span class="font-bold text-lg" style="color: var(--text);">Launchflow</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium" style="color: var(--text-dim);">
+            <a href="#solutions" class="hover:text-white transition">מה אני בונה</a>
+            <a href="#how" class="hover:text-white transition">איך זה עובד</a>
+            <a href="#portfolio" class="hover:text-white transition">מה כבר רץ</a>
+            <a href="#faq" class="hover:text-white transition">שאלות</a>
+        </nav>
+        <a href="#lead-form" class="btn-primary px-5 py-2.5 rounded-full text-sm">בואו נדבר</a>
+    </div>
+</header>
+
+<div id="top"></div>
 
 <!-- QUALIFIER BAR -->
-<div class="bg-slate-900 text-center py-3 px-4">
-    <p class="text-sm md:text-base font-medium text-blue-100">
+<div class="text-center py-2.5 px-4 mt-16" style="background: var(--bg-soft); border-bottom: 1px solid var(--border);">
+    <p class="text-xs md:text-sm font-medium" style="color: #b6c0e6;">
         לקוחות כותבים לך ב-11 בלילה ומחכים עד הבוקר לתשובה? יש דרך אחרת.
     </p>
 </div>
 
 <!-- HERO -->
-<section class="relative pt-16 pb-24 overflow-hidden">
-    <div class="absolute top-0 left-0 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply blob"></div>
-    <div class="absolute top-0 right-0 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply blob"></div>
-    <div class="container mx-auto px-4 relative z-10 text-center max-w-4xl">
-        <h1 class="text-4xl md:text-6xl font-bold text-slate-900 leading-tight mb-6">
-            בוט AI שעונה ללקוחות שלך<br>
-            <strong>24 שעות ביממה</strong> — לא רק בשעות העבודה
-        </h1>
-        <p class="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto">
-            אני בונה לעסק שלך בוט WhatsApp, סוכן AI מותאם אישית או אתר עם צ'אטבוט חכם.<br>
-            מותאם בדיוק לעסק שלך — לא תבנית גנרית. אתה לא נוגע בקוד.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <div class="flex flex-col gap-3 items-center">
-                <a href="#lead-form" class="btn-primary px-8 py-4 rounded-full text-lg font-bold shadow-lg">
-                    בואו נבדוק מה מתאים לעסק שלי
-                </a>
-                <a href="https://wa.me/972506007165?text=%D7%94%D7%99%D7%99%20%D7%90%D7%9C%D7%99%D7%A2%D7%96%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%91%D7%95%D7%98%20AI%20%D7%9C%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%99" target="_blank" rel="noopener noreferrer" class="text-sm text-slate-600 hover:text-blue-600 font-medium transition underline underline-offset-4">
-                    💬 או פשוט תכתוב לי בוואטסאפ
-                </a>
+<section class="relative pt-20 pb-28 overflow-hidden" style="background: radial-gradient(ellipse 80% 60% at 50% -10%, #171d3d 0%, var(--bg) 60%);">
+    <div class="grid-overlay"></div>
+    <div class="blob w-96 h-96 rounded-full -top-20 -right-20" style="background: #4f5bd5; opacity:.35;"></div>
+    <div class="blob w-96 h-96 rounded-full top-40 -left-32" style="background: #0ea5c9; opacity:.3;"></div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+            <div class="lg:w-1/2 text-center lg:text-right">
+                <span class="tag-pill mb-6">⚡ AI AGENTS · AUTOMATION</span>
+                <h1 class="text-4xl md:text-6xl font-black leading-tight mb-6 mt-4">
+                    בוט <span class="text-gradient">AI</span> שעונה ללקוחות שלך<br>
+                    24 שעות ביממה
+                </h1>
+                <p class="text-lg md:text-xl mb-10 max-w-xl mx-auto lg:mx-0" style="color: var(--text-dim);">
+                    אני בונה לעסק שלך בוט WhatsApp, סוכן AI מותאם אישית או אתר עם צ'אטבוט חכם — מותאם בדיוק לעסק שלך, לא תבנית גנרית. אתה לא נוגע בקוד.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="#lead-form" class="btn-primary px-8 py-4 rounded-full text-lg text-center">בואו נבדוק מה מתאים לעסק שלי</a>
+                    <a href="https://wa.me/972506007165?text=%D7%94%D7%99%D7%99%20%D7%90%D7%9C%D7%99%D7%A2%D7%96%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%91%D7%95%D7%98%20AI%20%D7%9C%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%99" target="_blank" rel="noopener noreferrer" class="btn-ghost px-8 py-4 rounded-full text-lg text-center">💬 תכתוב לי בוואטסאפ</a>
+                </div>
+            </div>
+
+            <div class="lg:w-1/2 w-full">
+                <figure>
+                    <svg viewBox="0 0 880 480" role="img" aria-label="תרשים זרימה: הודעת לקוח נכנסת לסוכן ה-AI במרכז, שמעבד אותה ומפעיל אוטומטית ובמקביל מענה בוואטסאפ, קביעת פגישה ביומן, שמירת הליד ב-CRM ושליחת סיכום במייל" class="w-full h-auto">
+                        <defs>
+                            <marker id="arrowHead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                                <path d="M0,0 L10,5 L0,10 z" fill="#6d8bff"/>
+                            </marker>
+                            <radialGradient id="coreGrad" cx="35%" cy="30%" r="75%">
+                                <stop offset="0%" stop-color="#a3b4ff"/>
+                                <stop offset="55%" stop-color="#5468e8"/>
+                                <stop offset="100%" stop-color="#2c3699"/>
+                            </radialGradient>
+                            <linearGradient id="nodeGrad" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#171d33"/>
+                                <stop offset="100%" stop-color="#0b0e1a"/>
+                            </linearGradient>
+                        </defs>
+
+                        <path class="flow-path" d="M764,240 L524,240" marker-end="url(#arrowHead)"/>
+                        <path class="flow-path" d="M416,240 C330,150 230,90 172,64" marker-end="url(#arrowHead)"/>
+                        <path class="flow-path" d="M416,240 C360,200 260,180 172,176" marker-end="url(#arrowHead)"/>
+                        <path class="flow-path" d="M416,240 C360,280 260,300 172,284" marker-end="url(#arrowHead)"/>
+                        <path class="flow-path" d="M416,240 C330,330 230,390 172,396" marker-end="url(#arrowHead)"/>
+
+                        <g transform="translate(800,240)">
+                            <circle r="36" fill="url(#nodeGrad)" stroke="#3a4470" stroke-width="1.5"/>
+                            <rect x="-15" y="-11" width="30" height="20" rx="6" fill="none" stroke="#c7d0ff" stroke-width="2"/>
+                            <circle cx="-6" cy="0" r="1.7" fill="#c7d0ff"/>
+                            <circle cx="0" cy="0" r="1.7" fill="#c7d0ff"/>
+                            <circle cx="6" cy="0" r="1.7" fill="#c7d0ff"/>
+                        </g>
+                        <text x="800" y="300" text-anchor="middle" class="node-label">פנייה מלקוח</text>
+
+                        <g transform="translate(470,240)">
+                            <circle class="pulse-ring" r="54" fill="none" stroke="#6d8bff" stroke-width="1.5"/>
+                            <circle r="54" fill="url(#coreGrad)"/>
+                            <circle r="17" fill="#0b0e1a" opacity=".3"/>
+                            <g stroke="#eef1fa" stroke-width="2.5" stroke-linecap="round">
+                                <line x1="0" y1="-27" x2="0" y2="-16"/>
+                                <line x1="0" y1="16" x2="0" y2="27"/>
+                                <line x1="-27" y1="0" x2="-16" y2="0"/>
+                                <line x1="16" y1="0" x2="27" y2="0"/>
+                            </g>
+                            <circle r="7" fill="#eef1fa"/>
+                        </g>
+                        <text x="470" y="316" text-anchor="middle" class="node-label-mono">AI AGENT</text>
+                        <text x="470" y="334" text-anchor="middle" class="node-label">מבין, מחליט, פועל</text>
+
+                        <g transform="translate(140,70)">
+                            <circle r="32" fill="url(#nodeGrad)" stroke="#25d366" stroke-width="1.5"/>
+                            <path d="M-11,-8 h22 a5,5 0 0 1 5,5 v6 a5,5 0 0 1 -5,5 h-14 l-8,6 v-6 a5,5 0 0 1 -5,-5 v-6 a5,5 0 0 1 5,-5 z" fill="none" stroke="#25d366" stroke-width="1.8" stroke-linejoin="round"/>
+                        </g>
+                        <text x="140" y="118" text-anchor="middle" class="node-label-strong">וואטסאפ</text>
+                        <text x="140" y="134" text-anchor="middle" class="node-label">מענה מיידי</text>
+
+                        <g transform="translate(140,173)">
+                            <circle r="32" fill="url(#nodeGrad)" stroke="#22d3ee" stroke-width="1.5"/>
+                            <rect x="-13" y="-11" width="26" height="22" rx="3" fill="none" stroke="#22d3ee" stroke-width="1.8"/>
+                            <line x1="-13" y1="-3" x2="13" y2="-3" stroke="#22d3ee" stroke-width="1.8"/>
+                            <line x1="-6" y1="-15" x2="-6" y2="-9" stroke="#22d3ee" stroke-width="1.8" stroke-linecap="round"/>
+                            <line x1="6" y1="-15" x2="6" y2="-9" stroke="#22d3ee" stroke-width="1.8" stroke-linecap="round"/>
+                        </g>
+                        <text x="140" y="221" text-anchor="middle" class="node-label-strong">יומן</text>
+                        <text x="140" y="237" text-anchor="middle" class="node-label">קביעת פגישה</text>
+
+                        <g transform="translate(140,287)">
+                            <circle r="32" fill="url(#nodeGrad)" stroke="#a855f7" stroke-width="1.5"/>
+                            <rect x="-13" y="-11" width="26" height="22" rx="2" fill="none" stroke="#a855f7" stroke-width="1.8"/>
+                            <line x1="-4.3" y1="-11" x2="-4.3" y2="11" stroke="#a855f7" stroke-width="1.4"/>
+                            <line x1="4.3" y1="-11" x2="4.3" y2="11" stroke="#a855f7" stroke-width="1.4"/>
+                            <line x1="-13" y1="0" x2="13" y2="0" stroke="#a855f7" stroke-width="1.4"/>
+                        </g>
+                        <text x="140" y="335" text-anchor="middle" class="node-label-strong">CRM</text>
+                        <text x="140" y="351" text-anchor="middle" class="node-label">שמירת הליד</text>
+
+                        <g transform="translate(140,400)">
+                            <circle r="32" fill="url(#nodeGrad)" stroke="#f59e0b" stroke-width="1.5"/>
+                            <rect x="-13" y="-9" width="26" height="18" rx="2" fill="none" stroke="#f59e0b" stroke-width="1.8"/>
+                            <polyline points="-13,-9 0,3 13,-9" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linejoin="round"/>
+                        </g>
+                        <text x="140" y="448" text-anchor="middle" class="node-label-strong">מייל</text>
+                        <text x="140" y="464" text-anchor="middle" class="node-label">סיכום אליך</text>
+                    </svg>
+                    <figcaption class="diagram-caption">כך זה עובד מאחורי הקלעים: הודעה אחת נכנסת לסוכן ה-AI, והוא מפעיל אוטומטית כמה פעולות במקביל — בלי שאתה נוגע בכלום.</figcaption>
+                </figure>
             </div>
         </div>
     </div>
 </section>
 
 <!-- PROBLEM -->
-<section class="py-20 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-col lg:flex-row items-center gap-12">
-            <div class="lg:w-1/2">
-                <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=80" alt="בעל עסק עסוק" class="rounded-2xl shadow-2xl transform -rotate-2 hover:rotate-0 transition duration-500">
+<section class="py-24" style="background: var(--bg-soft);">
+    <div class="container mx-auto px-4 max-w-5xl">
+        <div class="text-center mb-14">
+            <span class="eyebrow">THE PROBLEM</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-3">האם אתה מזהה את עצמך במצבים האלה?</h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+            <div class="card-glass p-6 flex items-start gap-4">
+                <span class="badge-fail">✕</span>
+                <span><strong style="color: var(--text);">לקוח פונה בערב, לא עונים</strong> — הוא כבר כתב למתחרה. תגובה איטית שווה ליד אבוד.</span>
             </div>
-            <div class="lg:w-1/2 space-y-5">
-                <h2 class="text-3xl font-bold text-slate-900">האם אתה מזהה את עצמך במצבים האלה?</h2>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3"><span class="text-red-500 mt-1">❌</span><span><strong>לקוח פונה בערב, לא עונים — הוא כבר כתב למתחרה.</strong> תגובה איטית שווה ליד אבוד.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-red-500 mt-1">❌</span><span><strong>אותן שאלות שוב ושוב:</strong> מחיר, זמינות, שעות פעילות — אתה או הצוות עונים ידנית על אותו דבר עשרות פעמים בשבוע.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-red-500 mt-1">❌</span><span><strong>הכל תלוי בך אישית:</strong> אתה בחופש, בפגישה, ישן — והעסק "סגור" להודעות.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-red-500 mt-1">❌</span><span><strong>ניסית "בוט" מוכן מהמדף:</strong> יצא נוקשה, לא מבין עברית טבעית, ולקוחות מתעצבנים ומתנתקים.</span></li>
-                    <li class="flex items-start gap-3"><span class="text-red-500 mt-1">❌</span><span><strong>אתה לא טכני</strong> ואין לך זמן ללמוד עוד פלטפורמה או לתחזק עוד מערכת.</span></li>
-                </ul>
+            <div class="card-glass p-6 flex items-start gap-4">
+                <span class="badge-fail">✕</span>
+                <span><strong style="color: var(--text);">אותן שאלות שוב ושוב:</strong> מחיר, זמינות, שעות פעילות — עונים ידנית על אותו דבר עשרות פעמים בשבוע.</span>
+            </div>
+            <div class="card-glass p-6 flex items-start gap-4">
+                <span class="badge-fail">✕</span>
+                <span><strong style="color: var(--text);">הכל תלוי בך אישית:</strong> בחופש, בפגישה, ישן — והעסק "סגור" להודעות.</span>
+            </div>
+            <div class="card-glass p-6 flex items-start gap-4">
+                <span class="badge-fail">✕</span>
+                <span><strong style="color: var(--text);">ניסית "בוט" מהמדף</strong> — יצא נוקשה, לא מבין עברית טבעית, לקוחות מתנתקים.</span>
             </div>
         </div>
-        <div class="mt-16 bg-red-50 border-r-4 border-red-500 p-8 rounded-lg">
-            <h3 class="text-2xl font-bold text-red-800 mb-3">כל דקת עיכוב במענה = לקוח שממשיך לחפש</h3>
-            <p class="text-red-900/80">הבעיה היא לא שאתה לא עובד מספיק. הבעיה היא שלקוחות מצפים למענה מיידי, ואי אפשר להיות זמין 24 שעות ביממה בעצמך.</p>
+
+        <div class="mt-8 card-glass p-8 text-center" style="border-color: rgba(248,113,113,.3); background: rgba(248,113,113,.06);">
+            <h3 class="text-xl md:text-2xl font-bold mb-2" style="color: #fecaca;">כל דקת עיכוב במענה = לקוח שממשיך לחפש</h3>
+            <p style="color: #f2b8b8;">הבעיה היא לא שאתה לא עובד מספיק. הבעיה היא שלקוחות מצפים למענה מיידי — ואי אפשר להיות זמין 24/7 בעצמך.</p>
         </div>
-        <div class="mt-12 text-center max-w-3xl mx-auto">
-            <h3 class="text-2xl font-bold text-slate-900 mb-4">דמיין לרגע מציאות אחרת...</h3>
-            <p class="text-lg text-slate-600 leading-relaxed">לקוח כותב ב-2 בלילה, מקבל תשובה מדויקת תוך שניות — בשם העסק שלך, בשפה שלך, עם המידע הנכון. ובבוקר אתה רואה רק את הפניות שבאמת דורשות אותך.</p>
+
+        <div class="mt-14 text-center max-w-2xl mx-auto">
+            <h3 class="text-2xl font-bold mb-4">דמיין לרגע מציאות אחרת...</h3>
+            <p class="text-lg leading-relaxed">לקוח כותב ב-2 בלילה, מקבל תשובה מדויקת תוך שניות — בשם העסק שלך, בשפה שלך, עם המידע הנכון. ובבוקר אתה רואה רק את הפניות שבאמת דורשות אותך.</p>
         </div>
     </div>
 </section>
 
 <!-- POSSIBILITY BRIDGE -->
-<section class="py-20 bg-blue-600 text-white">
-    <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-5xl font-bold mb-8">לא צריך בוט גנרי. <span class="text-blue-200">צריך בוט שמכיר את העסק שלך</span></h2>
-        <div class="grid md:grid-cols-3 gap-8 mt-12">
-            <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-blue-400">
-                <div class="text-4xl mb-4">🕐</div>
-                <p class="font-bold text-white text-xl mb-2">זמין 24/7</p>
-                <p class="text-blue-100">עונה ללקוחות גם כשאתה לא זמין — בלילה, בחג, בחופש.</p>
+<section class="py-24 relative overflow-hidden" style="background: radial-gradient(ellipse 90% 70% at 50% 50%, #141a35 0%, var(--bg) 70%);">
+    <div class="container mx-auto px-4 text-center relative z-10">
+        <span class="eyebrow">THE SHIFT</span>
+        <h2 class="text-3xl md:text-5xl font-bold mb-12 mt-3">לא צריך בוט גנרי. <span class="text-gradient">צריך בוט שמכיר את העסק שלך</span></h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="card-glass p-8">
+                <div class="icon-badge mx-auto mb-5">🕐</div>
+                <p class="font-bold text-xl mb-2" style="color: var(--text);">זמין 24/7</p>
+                <p>עונה ללקוחות גם כשאתה לא זמין — בלילה, בחג, בחופש.</p>
             </div>
-            <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-blue-400">
-                <div class="text-4xl mb-4">🎯</div>
-                <p class="font-bold text-white text-xl mb-2">מותאם אישית, לא תבנית</p>
-                <p class="text-blue-100">בנוי סביב המידע, המחירים והתהליך האמיתיים של העסק שלך.</p>
+            <div class="card-glass p-8">
+                <div class="icon-badge mx-auto mb-5">🎯</div>
+                <p class="font-bold text-xl mb-2" style="color: var(--text);">מותאם אישית, לא תבנית</p>
+                <p>בנוי סביב המידע, המחירים והתהליך האמיתיים של העסק שלך.</p>
             </div>
-            <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-blue-400">
-                <div class="text-4xl mb-4">🛠️</div>
-                <p class="font-bold text-white text-xl mb-2">אפס טכניקה מהצד שלך</p>
-                <p class="text-blue-100">אני בונה, מטמיע ותומך. אתה רק מקבל תוצאה.</p>
+            <div class="card-glass p-8">
+                <div class="icon-badge mx-auto mb-5">🛠️</div>
+                <p class="font-bold text-xl mb-2" style="color: var(--text);">אפס טכניקה מהצד שלך</p>
+                <p>אני בונה, מטמיע ותומך. אתה רק מקבל תוצאה.</p>
             </div>
         </div>
-        <div class="mt-12 flex flex-col gap-3 items-center">
-            <a href="#lead-form" class="inline-block bg-white text-blue-600 font-bold py-4 px-10 rounded-full hover:bg-gray-100 transition shadow-lg">
-                בואו נבדוק מה מתאים לי
-            </a>
-        </div>
+        <a href="#lead-form" class="btn-primary inline-block mt-12 px-10 py-4 rounded-full text-lg">בואו נבדוק מה מתאים לי</a>
     </div>
 </section>
 
 <!-- MID-PAGE FORM -->
-<section id="lead-form" class="py-20 bg-gradient-to-b from-blue-50 to-white">
-    <div class="container mx-auto px-4 max-w-2xl">
-        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 border-2 border-blue-100">
-            <h2 class="text-3xl font-bold mb-4 text-center text-slate-900">רוצה לבדוק אם בוט AI מתאים לעסק שלך?</h2>
-            <p class="text-center text-slate-600 mb-6">השאר פרטים, ואחזור אליך לשיחת התאמה קצרה — בלי התחייבות</p>
+<section id="lead-form" class="py-24" style="background: var(--bg-soft);">
+    <div class="container mx-auto px-4 max-w-xl">
+        <div class="card-glass p-8 md:p-10" style="border-color: rgba(109,139,255,.3);">
+            <h2 class="text-2xl md:text-3xl font-bold mb-3 text-center">רוצה לבדוק אם בוט AI מתאים לעסק שלך?</h2>
+            <p class="text-center mb-7">השאר פרטים, ואחזור אליך לשיחת התאמה קצרה — בלי התחייבות</p>
             <form id="lead-form-main" class="space-y-2">
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">שם מלא</label>
-                    <input type="text" required class="form-input bg-slate-50" placeholder="ישראל ישראלי">
+                    <label class="block text-sm font-medium mb-1" style="color: var(--text-dim);">שם מלא</label>
+                    <input type="text" required class="form-input" placeholder="ישראל ישראלי">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">טלפון</label>
-                    <input type="tel" required class="form-input bg-slate-50" placeholder="050-0000000">
+                    <label class="block text-sm font-medium mb-1" style="color: var(--text-dim);">טלפון</label>
+                    <input type="tel" required class="form-input" placeholder="050-0000000">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">מייל</label>
-                    <input type="email" required class="form-input bg-slate-50" placeholder="example@gmail.com">
+                    <label class="block text-sm font-medium mb-1" style="color: var(--text-dim);">מייל</label>
+                    <input type="email" required class="form-input" placeholder="example@gmail.com">
                 </div>
-                <button type="submit" class="w-full btn-primary font-bold py-4 rounded-lg text-lg shadow-lg">
-                    תתקשרו אליי
-                </button>
+                <button type="submit" class="w-full btn-primary py-4 rounded-lg text-lg">תתקשרו אליי</button>
             </form>
         </div>
     </div>
 </section>
 
 <!-- STATS -->
-<section class="py-16 bg-slate-50">
+<section class="py-20">
     <div class="container mx-auto px-4">
-        <h2 class="text-center text-3xl font-bold mb-12 text-slate-800">מה זה בפועל</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div class="p-6 bg-white rounded-xl shadow-sm card-hover transition">
-                <div class="text-4xl font-bold text-blue-600 mb-2">24/7</div>
-                <div class="text-slate-600">זמינות ללקוחות שלך</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
+            <div class="card-glass p-6">
+                <div class="text-4xl font-black text-gradient mb-1">24/7</div>
+                <div class="text-sm" style="color: var(--text-dim);">זמינות ללקוחות שלך</div>
             </div>
-            <div class="p-6 bg-white rounded-xl shadow-sm card-hover transition">
-                <div class="text-4xl font-bold text-blue-600 mb-2">1:1</div>
-                <div class="text-slate-600">עסק אחד = בוט מותאם אחד</div>
+            <div class="card-glass p-6">
+                <div class="text-4xl font-black text-gradient mb-1">1:1</div>
+                <div class="text-sm" style="color: var(--text-dim);">עסק אחד = בוט מותאם אחד</div>
             </div>
-            <div class="p-6 bg-white rounded-xl shadow-sm card-hover transition">
-                <div class="text-4xl font-bold text-blue-600 mb-2">2+</div>
-                <div class="text-slate-600">מערכות AI כבר בפרודקשן</div>
+            <div class="card-glass p-6">
+                <div class="text-4xl font-black text-gradient mb-1">2+</div>
+                <div class="text-sm" style="color: var(--text-dim);">מערכות AI כבר בפרודקשן</div>
             </div>
-            <div class="p-6 bg-white rounded-xl shadow-sm card-hover transition">
-                <div class="text-4xl font-bold text-blue-600 mb-2">0</div>
-                <div class="text-slate-600">קוד או תחזוקה מהצד שלך</div>
+            <div class="card-glass p-6">
+                <div class="text-4xl font-black text-gradient mb-1">0</div>
+                <div class="text-sm" style="color: var(--text-dim);">קוד או תחזוקה מהצד שלך</div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- SOLUTION FRAMEWORK -->
-<section class="py-20 bg-white">
+<section id="solutions" class="py-24" style="background: var(--bg-soft);">
     <div class="container mx-auto px-4 max-w-5xl">
-        <h2 class="text-center text-3xl font-bold mb-4 text-slate-900">מה אני בונה</h2>
-        <p class="text-center text-slate-600 mb-12 max-w-2xl mx-auto">שלושה סוגי פתרונות, לפי מה שהעסק שלך באמת צריך</p>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="border border-slate-200 rounded-xl p-8 hover:shadow-lg transition">
-                <div class="text-3xl mb-4">💬</div>
-                <h3 class="font-bold text-xl mb-3 text-slate-900">בוט WhatsApp</h3>
-                <p class="text-slate-600">עונה ללקוחות ישירות בוואטסאפ העסקי שלך — שאלות נפוצות, זמינות, תיאום פגישות, והעברת פניות חמות אליך בזמן אמת.</p>
+        <div class="text-center mb-14">
+            <span class="eyebrow">WHAT I BUILD</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-3">מה אני בונה</h2>
+            <p class="max-w-xl mx-auto">שלושה סוגי פתרונות, לפי מה שהעסק שלך באמת צריך</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="card-glass p-8">
+                <div class="icon-badge mb-5">💬</div>
+                <h3 class="font-bold text-xl mb-3">בוט WhatsApp</h3>
+                <p>עונה ללקוחות ישירות בוואטסאפ העסקי שלך — שאלות נפוצות, זמינות, תיאום פגישות, והעברת פניות חמות אליך בזמן אמת.</p>
             </div>
-            <div class="border border-slate-200 rounded-xl p-8 hover:shadow-lg transition">
-                <div class="text-3xl mb-4">🤖</div>
-                <h3 class="font-bold text-xl mb-3 text-slate-900">סוכן AI מותאם אישית</h3>
-                <p class="text-slate-600">אוטומציה שמבצעת עבורך משימות בפועל — לא רק שיחה. לדוגמה: מיון פניות, ניהול נתונים, יצירת דוחות, מעקב אחרי תהליכים שחוזרים על עצמם.</p>
+            <div class="card-glass p-8">
+                <div class="icon-badge mb-5">🤖</div>
+                <h3 class="font-bold text-xl mb-3">סוכן AI מותאם אישית</h3>
+                <p>אוטומציה שמבצעת עבורך משימות בפועל — לא רק שיחה. מיון פניות, ניהול נתונים, דוחות, מעקב אחרי תהליכים חוזרים.</p>
             </div>
-            <div class="border border-slate-200 rounded-xl p-8 hover:shadow-lg transition">
-                <div class="text-3xl mb-4">🌐</div>
-                <h3 class="font-bold text-xl mb-3 text-slate-900">אתר עם צ'אטבוט חכם</h3>
-                <p class="text-slate-600">אתר או דף נחיתה עם עוזר AI שמדבר עם המבקרים, עונה על שאלות ומוביל אותם להשאיר פרטים — במקום טופס סטטי שאף אחד לא ממלא.</p>
+            <div class="card-glass p-8">
+                <div class="icon-badge mb-5">🌐</div>
+                <h3 class="font-bold text-xl mb-3">אתר עם צ'אטבוט חכם</h3>
+                <p>אתר או דף נחיתה עם עוזר AI שמדבר עם המבקרים, עונה על שאלות ומוביל אותם להשאיר פרטים — במקום טופס סטטי.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- PORTFOLIO -->
-<section class="py-20 bg-slate-50">
+<section id="portfolio" class="py-24">
     <div class="container mx-auto px-4 max-w-5xl">
-        <h2 class="text-center text-3xl font-bold mb-4 text-slate-900">מה כבר בנוי ורץ</h2>
-        <p class="text-center text-slate-600 mb-12 max-w-2xl mx-auto">לא תיאוריה — מערכות אמיתיות שעובדות אצל לקוחות היום</p>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-xl p-8 border border-slate-200 shadow-sm">
-                <h3 class="font-bold text-xl mb-2 text-slate-900">מיכל — בוט הלקוחות של משרד רו"ח</h3>
-                <p class="text-slate-600 mb-3">בוט WhatsApp בשם "מיכל" שעונה בשם המשרד על פניות לקוחות, אוסף פרטים ומעביר פניות חמות ישירות לבעלת המשרד — בלי שהיא צריכה לענות ידנית לכל הודעה.</p>
-                <span class="inline-block bg-blue-50 text-blue-600 text-sm font-medium px-3 py-1 rounded-full">בוט WhatsApp מותאם אישית</span>
+        <div class="text-center mb-14">
+            <span class="eyebrow">ALREADY LIVE</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-3">מה כבר בנוי ורץ</h2>
+            <p class="max-w-xl mx-auto">לא תיאוריה — מערכות אמיתיות שעובדות אצל לקוחות היום</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="card-glass p-8">
+                <h3 class="font-bold text-xl mb-2">מיכל — בוט הלקוחות של משרד רו"ח</h3>
+                <p class="mb-2">בוט WhatsApp בשם "מיכל" שעונה בשם המשרד על פניות לקוחות, אוסף פרטים ומעביר פניות חמות ישירות לבעלת המשרד.</p>
+                <div class="mini-flow">
+                    <span class="mini-node">💬<small>לקוח</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">🤖<small>מיכל</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">✅<small>מענה</small></span>
+                </div>
+                <span class="tag-pill mt-5">בוט WhatsApp מותאם אישית</span>
             </div>
-            <div class="bg-white rounded-xl p-8 border border-slate-200 shadow-sm">
-                <h3 class="font-bold text-xl mb-2 text-slate-900">מערכת ניהול צילומי שלטים</h3>
-                <p class="text-slate-600 mb-3">מערכת שמנהלת ומעבדת צילומים ונתונים בזמן אמת מול Supabase, חוסכת עבודה ידנית של איסוף וסידור מידע שנעשתה קודם ידנית לגמרי.</p>
-                <span class="inline-block bg-blue-50 text-blue-600 text-sm font-medium px-3 py-1 rounded-full">אוטומציה + ניהול נתונים</span>
+            <div class="card-glass p-8">
+                <h3 class="font-bold text-xl mb-2">מערכת ניהול צילומי שלטים</h3>
+                <p class="mb-2">מערכת שמנהלת ומעבדת צילומים ונתונים בזמן אמת מול Supabase, חוסכת עבודה ידנית של איסוף וסידור מידע.</p>
+                <div class="mini-flow">
+                    <span class="mini-node">📸<small>צילום</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">⚙️<small>עיבוד</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">🗂️<small>נשמר</small></span>
+                </div>
+                <span class="tag-pill mt-5">אוטומציה + ניהול נתונים</span>
             </div>
         </div>
     </div>
 </section>
 
 <!-- 3 STEPS -->
-<section class="py-20 bg-white">
+<section id="how" class="py-24" style="background: var(--bg-soft);">
     <div class="container mx-auto px-4">
-        <h2 class="text-center text-3xl font-bold mb-12 text-slate-900">איך זה עובד</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="relative">
-                <div class="absolute -top-4 -right-4 bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center font-bold text-blue-600 text-xl border-2 border-blue-600">1</div>
-                <div class="bg-slate-50 p-8 rounded-xl h-full border border-slate-100 hover:shadow-md transition">
-                    <h3 class="font-bold text-xl mb-4 text-slate-900">שיחת התאמה</h3>
-                    <p class="text-slate-600">שיחה קצרה שבה מבינים איפה העסק שלך מאבד זמן או לקוחות, ואיזה פתרון באמת רלוונטי — בוט, סוכן, או אתר.</p>
-                </div>
+        <div class="text-center mb-4">
+            <span class="eyebrow">THE PROCESS</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-14">איך זה עובד</h2>
+        </div>
+        <div class="step-track max-w-2xl mx-auto">
+            <div class="step-node">1</div>
+            <div class="step-line"></div>
+            <div class="step-node">2</div>
+            <div class="step-line"></div>
+            <div class="step-node">3</div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="card-glass p-8">
+                <h3 class="font-bold text-xl mb-3">שיחת התאמה</h3>
+                <p>שיחה קצרה שבה מבינים איפה העסק שלך מאבד זמן או לקוחות, ואיזה פתרון באמת רלוונטי — בוט, סוכן, או אתר.</p>
             </div>
-            <div class="relative">
-                <div class="absolute -top-4 -right-4 bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center font-bold text-blue-600 text-xl border-2 border-blue-600">2</div>
-                <div class="bg-slate-50 p-8 rounded-xl h-full border border-slate-100 hover:shadow-md transition">
-                    <h3 class="font-bold text-xl mb-4 text-slate-900">בנייה מותאמת</h3>
-                    <p class="text-slate-600">בונה את הבוט/הסוכן סביב המידע והתהליכים האמיתיים של העסק שלך. אתה לא נוגע בקוד ולא בהגדרות.</p>
-                </div>
+            <div class="card-glass p-8">
+                <h3 class="font-bold text-xl mb-3">בנייה מותאמת</h3>
+                <p>בונה את הבוט/הסוכן סביב המידע והתהליכים האמיתיים של העסק שלך. אתה לא נוגע בקוד ולא בהגדרות.</p>
             </div>
-            <div class="relative">
-                <div class="absolute -top-4 -right-4 bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center font-bold text-blue-600 text-xl border-2 border-blue-600">3</div>
-                <div class="bg-slate-50 p-8 rounded-xl h-full border border-slate-100 hover:shadow-md transition">
-                    <h3 class="font-bold text-xl mb-4 text-slate-900">הטמעה ותמיכה</h3>
-                    <p class="text-slate-600">מחברים לוואטסאפ/לאתר שלך, בודקים ביחד, ומכוונים לפי תגובות אמיתיות של לקוחות. נשאר זמין לתמיכה שוטפת.</p>
-                </div>
+            <div class="card-glass p-8">
+                <h3 class="font-bold text-xl mb-3">הטמעה ותמיכה</h3>
+                <p>מחברים לוואטסאפ/לאתר שלך, בודקים ביחד, ומכוונים לפי תגובות אמיתיות. נשאר זמין לתמיכה שוטפת.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- FOUNDER STORY -->
-<section class="py-20 bg-blue-50">
-    <div class="container mx-auto px-4 max-w-3xl text-center">
-        <h2 class="text-3xl font-bold mb-6 text-slate-900">קצת עליי</h2>
-        <p class="text-lg text-slate-700 leading-relaxed">
+<section class="py-24 relative overflow-hidden" style="background: radial-gradient(ellipse 80% 60% at 50% 50%, #141a35 0%, var(--bg) 70%);">
+    <div class="container mx-auto px-4 max-w-3xl text-center relative z-10">
+        <span class="eyebrow">WHO'S BEHIND THIS</span>
+        <h2 class="text-3xl font-bold mb-6 mt-3">קצת עליי</h2>
+        <p class="text-lg leading-relaxed">
             אני אליעז אסולין. התחלתי בבניית דפי נחיתה לעסקים קטנים, אבל ראיתי שוב ושוב את אותה תבנית: הבעיה האמיתית של בעלי עסקים היא לא רק "איך מביאים ליד" — אלא מה קורה אחרי, כשלקוח כותב ומחכה לתשובה. בניתי בעצמי כמה מערכות AI שרצות היום בפרודקשן — בוט לקוחות אמיתי, מערכת לניהול נתונים אוטומטית — וראיתי כמה זמן וכסף זה חוסך לעסק. עכשיו זה מה שאני בונה: בוטים וסוכני AI שעובדים בפועל, לא דמואים מרשימים שנשארים על המדף.
         </p>
     </div>
 </section>
 
 <!-- OFFER STACK -->
-<section class="py-20 bg-slate-50" id="offer">
-    <div class="container mx-auto px-4 max-w-4xl">
-        <h2 class="text-center text-3xl font-bold mb-10 text-slate-900">מה כלול</h2>
-        <div class="bg-white rounded-2xl shadow-xl border-2 border-blue-100 overflow-hidden">
-            <div class="bg-blue-600 p-4 text-center text-white font-bold text-lg">כל בוט/סוכן נבנה סביב העסק שלך</div>
-            <div class="p-6 md:p-8">
+<section class="py-24" style="background: var(--bg-soft);" id="offer">
+    <div class="container mx-auto px-4 max-w-3xl">
+        <h2 class="text-center text-3xl font-bold mb-10">מה כלול</h2>
+        <div class="card-glass overflow-hidden" style="border-color: rgba(109,139,255,.3);">
+            <div class="p-4 text-center font-bold text-lg" style="background: linear-gradient(135deg, rgba(124,155,255,.18), rgba(34,211,238,.14)); color: var(--text); border-bottom: 1px solid var(--border);">כל בוט/סוכן נבנה סביב העסק שלך</div>
+            <div class="p-6 md:p-10">
                 <ul class="space-y-4">
-                    <li class="flex items-start gap-2 border-b border-gray-100 pb-3"><span class="text-blue-500 mt-1">✓</span><span>שיחת התאמה — מבינים מה באמת יעזור לעסק שלך</span></li>
-                    <li class="flex items-start gap-2 border-b border-gray-100 pb-3"><span class="text-blue-500 mt-1">✓</span><span>בוט/סוכן AI מותאם אישית — לא תבנית גנרית</span></li>
-                    <li class="flex items-start gap-2 border-b border-gray-100 pb-3"><span class="text-blue-500 mt-1">✓</span><span>חיבור לוואטסאפ העסקי / לאתר שלך</span></li>
-                    <li class="flex items-start gap-2 border-b border-gray-100 pb-3"><span class="text-blue-500 mt-1">✓</span><span>בדיקות וכיוונון לפי תגובות לקוחות אמיתיות</span></li>
-                    <li class="flex items-start gap-2 pb-2"><span class="text-blue-500 mt-1">✓</span><span>ליווי ותמיכה גם אחרי ההשקה</span></li>
+                    <li class="flex items-start gap-3 border-b pb-4" style="border-color: var(--border);"><span class="badge-check mt-0.5">✓</span><span style="color: var(--text);">שיחת התאמה — מבינים מה באמת יעזור לעסק שלך</span></li>
+                    <li class="flex items-start gap-3 border-b pb-4" style="border-color: var(--border);"><span class="badge-check mt-0.5">✓</span><span style="color: var(--text);">בוט/סוכן AI מותאם אישית — לא תבנית גנרית</span></li>
+                    <li class="flex items-start gap-3 border-b pb-4" style="border-color: var(--border);"><span class="badge-check mt-0.5">✓</span><span style="color: var(--text);">חיבור לוואטסאפ העסקי / לאתר שלך</span></li>
+                    <li class="flex items-start gap-3 border-b pb-4" style="border-color: var(--border);"><span class="badge-check mt-0.5">✓</span><span style="color: var(--text);">בדיקות וכיוונון לפי תגובות לקוחות אמיתיות</span></li>
+                    <li class="flex items-start gap-3"><span class="badge-check mt-0.5">✓</span><span style="color: var(--text);">ליווי ותמיכה גם אחרי ההשקה</span></li>
                 </ul>
-                <div class="mt-8 text-center bg-blue-50 rounded-xl p-6">
-                    <p class="text-lg font-bold text-slate-800 mb-2">המחיר נקבע לפי היקף הפרויקט</p>
-                    <p class="text-slate-600">כל עסק שונה — כמות הפניות, האינטגרציות והמורכבות משתנות. נדבר בשיחה קצרה וחינמית ואגיד לך בדיוק מה נדרש ומה זה יעלה.</p>
+                <div class="mt-8 text-center card-glass p-6" style="background: rgba(109,139,255,.06);">
+                    <p class="text-lg font-bold mb-2" style="color: var(--text);">המחיר נקבע לפי היקף הפרויקט</p>
+                    <p>כל עסק שונה — כמות הפניות, האינטגרציות והמורכבות משתנות. נדבר בשיחה קצרה וחינמית ואגיד לך בדיוק מה נדרש ומה זה יעלה.</p>
                 </div>
                 <div class="mt-6 text-center">
-                    <a href="https://wa.me/972506007165?text=%D7%94%D7%99%D7%99%20%D7%90%D7%9C%D7%99%D7%A2%D7%96%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%91%D7%95%D7%98%20AI%20%D7%9C%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%99" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white font-bold py-4 px-10 rounded-lg hover:bg-blue-700 transition shadow-md text-lg">
-                        💬 בואו נדבר בוואטסאפ
-                    </a>
+                    <a href="https://wa.me/972506007165?text=%D7%94%D7%99%D7%99%20%D7%90%D7%9C%D7%99%D7%A2%D7%96%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%91%D7%95%D7%98%20AI%20%D7%9C%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%99" target="_blank" rel="noopener noreferrer" class="btn-primary inline-block px-10 py-4 rounded-full text-lg">💬 בואו נדבר בוואטסאפ</a>
                 </div>
             </div>
         </div>
@@ -282,51 +472,53 @@
 </section>
 
 <!-- FAQ -->
-<section class="py-20 bg-white">
+<section id="faq" class="py-24">
     <div class="container mx-auto px-4 max-w-3xl">
-        <h2 class="text-2xl font-bold mb-8 text-center text-slate-900">שאלות נפוצות</h2>
-        <div class="space-y-6">
-            <div class="bg-slate-50 p-6 rounded-xl">
-                <p class="font-bold text-slate-800 mb-2">"הבוט מבין עברית טבעית, לא רק תפריט קבוע?"</p>
-                <p class="text-slate-600">כן. הבוטים בנויים על מודלי AI מתקדמים שמבינים ניסוח חופשי בעברית, לא רק כפתורים או מילות מפתח קבועות.</p>
+        <h2 class="text-2xl md:text-3xl font-bold mb-10 text-center">שאלות נפוצות</h2>
+        <div class="space-y-4">
+            <div class="card-glass p-6">
+                <p class="font-bold mb-2" style="color: var(--text);">"הבוט מבין עברית טבעית, לא רק תפריט קבוע?"</p>
+                <p>כן. הבוטים בנויים על מודלי AI מתקדמים שמבינים ניסוח חופשי בעברית, לא רק כפתורים או מילות מפתח קבועות.</p>
             </div>
-            <div class="bg-slate-50 p-6 rounded-xl">
-                <p class="font-bold text-slate-800 mb-2">"מה עם פרטיות המידע של הלקוחות שלי?"</p>
-                <p class="text-slate-600">הנתונים נשמרים במערכות מאובטחות ולא נמכרים או משותפים לצד שלישי. עוברים על זה בפירוט בשיחת ההתאמה לפי הצרכים הספציפיים של העסק שלך.</p>
+            <div class="card-glass p-6">
+                <p class="font-bold mb-2" style="color: var(--text);">"מה עם פרטיות המידע של הלקוחות שלי?"</p>
+                <p>הנתונים נשמרים במערכות מאובטחות ולא נמכרים או משותפים לצד שלישי. עוברים על זה בפירוט בשיחת ההתאמה.</p>
             </div>
-            <div class="bg-slate-50 p-6 rounded-xl">
-                <p class="font-bold text-slate-800 mb-2">"אני לא טכני בכלל — זה מתאים לי?"</p>
-                <p class="text-slate-600">בדיוק בשביל זה זה נבנה. אתה לא נוגע בקוד, לא מגדיר כלום — אני בונה, מטמיע ומראה לך איך זה עובד.</p>
+            <div class="card-glass p-6">
+                <p class="font-bold mb-2" style="color: var(--text);">"אני לא טכני בכלל — זה מתאים לי?"</p>
+                <p>בדיוק בשביל זה זה נבנה. אתה לא נוגע בקוד, לא מגדיר כלום — אני בונה, מטמיע ומראה לך איך זה עובד.</p>
             </div>
-            <div class="bg-slate-50 p-6 rounded-xl">
-                <p class="font-bold text-slate-800 mb-2">"כמה זמן לוקח להקים?"</p>
-                <p class="text-slate-600">תלוי בהיקף — בוט WhatsApp בסיסי יכול לרוץ תוך ימים ספורים, סוכן מורכב יותר עם כמה אינטגרציות לוקח יותר. נגדיר לוח זמנים מדויק בשיחת ההתאמה.</p>
+            <div class="card-glass p-6">
+                <p class="font-bold mb-2" style="color: var(--text);">"כמה זמן לוקח להקים?"</p>
+                <p>תלוי בהיקף — בוט WhatsApp בסיסי יכול לרוץ תוך ימים ספורים, סוכן מורכב יותר לוקח יותר. נגדיר לוח זמנים בשיחת ההתאמה.</p>
             </div>
-            <div class="bg-slate-50 p-6 rounded-xl">
-                <p class="font-bold text-slate-800 mb-2">"מה ההבדל בין זה לצ'אטבוט הרגיל שיש בכל אתר?"</p>
-                <p class="text-slate-600">צ'אטבוט רגיל עונה מתוך תפריט קבוע. מה שאני בונה מבין הקשר, ניסוח חופשי, ובמקרים מסוימים גם מבצע פעולות בפועל (כמו איסוף פרטים או עדכון מערכת) — לא רק "מדבר".</p>
+            <div class="card-glass p-6">
+                <p class="font-bold mb-2" style="color: var(--text);">"מה ההבדל בין זה לצ'אטבוט הרגיל שיש בכל אתר?"</p>
+                <p>צ'אטבוט רגיל עונה מתוך תפריט קבוע. מה שאני בונה מבין הקשר, ניסוח חופשי, ולעיתים גם מבצע פעולות בפועל — לא רק "מדבר".</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- BOTTOM FORM -->
-<section class="py-20 bg-blue-600">
-    <div class="container mx-auto px-4 max-w-2xl text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">מוכן לבדוק מה מתאים לעסק שלך?</h2>
-        <p class="text-blue-100 mb-8">השאר פרטים ואחזור אליך תוך שעה בימי עבודה</p>
-        <div class="bg-white rounded-2xl p-8">
+<section class="py-24 relative overflow-hidden" style="background: radial-gradient(ellipse 90% 80% at 50% 50%, #1a1440 0%, var(--bg) 70%);">
+    <div class="container mx-auto px-4 max-w-xl text-center relative z-10">
+        <h2 class="text-3xl font-bold mb-4">מוכן לבדוק מה מתאים לעסק שלך?</h2>
+        <p class="mb-8">השאר פרטים ואחזור אליך תוך שעה בימי עבודה</p>
+        <div class="card-glass p-8" style="border-color: rgba(109,139,255,.3);">
             <form class="space-y-2">
-                <input type="text" required class="form-input bg-slate-50" placeholder="שם מלא">
-                <input type="tel" required class="form-input bg-slate-50" placeholder="טלפון">
-                <input type="email" required class="form-input bg-slate-50" placeholder="מייל">
-                <button type="submit" class="w-full btn-primary font-bold py-4 rounded-lg text-lg shadow-lg">
-                    אני רוצה בוט AI לעסק שלי
-                </button>
+                <input type="text" required class="form-input" placeholder="שם מלא">
+                <input type="tel" required class="form-input" placeholder="טלפון">
+                <input type="email" required class="form-input" placeholder="מייל">
+                <button type="submit" class="w-full btn-primary py-4 rounded-lg text-lg">אני רוצה בוט AI לעסק שלי</button>
             </form>
         </div>
     </div>
 </section>
+
+<footer class="py-10 text-center text-sm" style="background: var(--bg-soft); color: var(--text-faint); border-top: 1px solid var(--border);">
+    Launchflow · אליעז אסולין · בוטים וסוכני AI לעסקים קטנים
+</footer>
 
 <!-- WHATSAPP FLOAT -->
 <a href="https://wa.me/972506007165?text=%D7%94%D7%99%D7%99%20%D7%90%D7%9C%D7%99%D7%A2%D7%96%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%91%D7%95%D7%98%20AI%20%D7%9C%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%99" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
@@ -370,7 +562,6 @@ document.querySelectorAll('form').forEach(form => {
         await saveLead(name, phone, email);
 
         btn.textContent = '✓ קיבלנו! נחזור אליך בהקדם';
-        btn.classList.add('bg-green-600');
         this.reset();
     });
 });
