@@ -613,8 +613,15 @@
     const heroSection = canvas.closest('section');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const params = { opacity: 0.35, density: 70, speed: 0.3, link: 140, glow: 6 };
+    const params = { opacity: 1.0, speed: 1.15, link: 230, glow: 15 };
     let W, H, DPR, nodes = [];
+
+    // Node count scales with canvas area so density looks the same regardless
+    // of how tall/wide the hero section ends up (calibrated so a ~1600x900 hero
+    // lands around the 140 nodes approved in the tuning demo).
+    function densityForArea() {
+        return Math.max(35, Math.min(220, Math.round((W * H) / 10000)));
+    }
 
     function resize() {
         DPR = Math.min(window.devicePixelRatio || 1, 2);
@@ -629,7 +636,8 @@
 
     function seedNodes() {
         nodes = [];
-        for (let i = 0; i < params.density; i++) {
+        const count = densityForArea();
+        for (let i = 0; i < count; i++) {
             const depth = 0.4 + Math.random() * 0.6;
             nodes.push({
                 x: Math.random() * W,
