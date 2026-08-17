@@ -696,11 +696,23 @@
     resize();
     seedNodes();
     step();
+
     let resizeTimer;
-    window.addEventListener('resize', () => {
+    function handleResize() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => { resize(); seedNodes(); }, 150);
-    });
+    }
+    window.addEventListener('resize', handleResize);
+
+    // Section height can change after load (webfont swap, RTL text reflow) without
+    // a window resize event firing — watch the section itself so the canvas never
+    // stays locked to a stale, too-small size.
+    if ('ResizeObserver' in window) {
+        new ResizeObserver(handleResize).observe(heroSection);
+    }
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(handleResize);
+    }
 })();
 
 const SUPABASE_URL = 'https://mjthsjjcsioqsohlqzxk.supabase.co';
