@@ -561,8 +561,7 @@ document.querySelectorAll('form').forEach(form => {
 
         await saveLead(name, phone, email);
 
-        btn.textContent = '✓ קיבלנו! נחזור אליך בהקדם';
-        this.reset();
+        window.location.href = 'thank-you.html';
     });
 });
 </script>
