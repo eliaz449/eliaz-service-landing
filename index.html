@@ -47,6 +47,9 @@
         .whatsapp-float:hover { transform: scale(1.08); }
         @keyframes wapulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); } 70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
 
+        .call-float { position: fixed; width: 60px; height: 60px; bottom: 100px; left: 30px; background: linear-gradient(135deg, #7c9bff, #22d3ee); color: #05060b; border-radius: 50px; display: flex; align-items: center; justify-content: center; z-index: 100; transition: transform .3s; text-decoration: none; box-shadow: 0 10px 26px -8px rgba(109,139,255,.65); }
+        .call-float:hover { transform: scale(1.08); }
+
         #heroMesh { position: absolute; inset: 0; z-index: 0; display: block; width: 100%; height: 100%; }
 
         .icon-badge { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; background: linear-gradient(135deg, rgba(109,139,255,.16), rgba(34,211,238,.12)); border: 1px solid rgba(109,139,255,.32); box-shadow: 0 0 28px -6px rgba(109,139,255,.35); }
@@ -516,8 +519,11 @@
     <div class="container mx-auto px-4 max-w-3xl text-center relative z-10">
         <span class="eyebrow">WHO WE ARE</span>
         <h2 class="text-3xl font-bold mb-6 mt-3">מי אנחנו</h2>
+        <p class="text-lg leading-relaxed mb-5">
+            זה התחיל בלי שום תוכנית עסקית. סתם סקרנות, בזמן הפנוי — הרצון לבנות משהו שבאמת עובד. הבוט הראשון נולד כדי לעזור לבן משפחה שטבע בהודעות חוזרות מלקוחות. אחרי זה באה מערכת שחסכה לעסק אחר שעות של עבודה ידנית בכל שבוע. ואז עוד אחת.
+        </p>
         <p class="text-lg leading-relaxed">
-            ב-Launchflow התחלנו בבניית דפי נחיתה לעסקים קטנים, אבל ראינו שוב ושוב את אותה תבנית: הבעיה האמיתית של בעלי עסקים היא לא רק "איך מביאים ליד" — אלא מה קורה אחרי, כשלקוח כותב ומחכה לתשובה. בנינו כמה מערכות AI שרצות היום בפרודקשן — בוט לקוחות אמיתי, מערכת לניהול נתונים אוטומטית — וראינו כמה זמן וכסף זה חוסך לעסק. היום זה מה שאנחנו בונים: בוטים וסוכני AI שעובדים בפועל, לא דמואים מרשימים שנשארים על המדף.
+            בכל פרויקט קרה אותו דבר: זה לא רק "נשמע מגניב" — זה <span class="text-gradient">עבד</span>. חסך כסף וזמן אמיתיים, ומוכיח את עצמו מחדש בכל פעם. בשלב מסוים זה הפסיק להיות תחביב. היום זה מה שאנחנו עושים בפועל — כי ראינו במו עינינו מה בינה מלאכותית שבנויה נכון יכולה לעשות לעסק קטן, ורצינו לבנות את זה גם בשבילך.
         </p>
     </div>
 </section>
@@ -597,6 +603,13 @@
 <footer class="py-10 text-center text-sm" style="background: var(--bg-soft); color: var(--text-faint); border-top: 1px solid var(--border);">
     Launchflow · בוטים וסוכני AI לעסקים קטנים
 </footer>
+
+<!-- CALL FLOAT -->
+<a href="tel:+972506007165" class="call-float" aria-label="התקשרו אלינו">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#05060b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+    </svg>
+</a>
 
 <!-- WHATSAPP FLOAT -->
 <a href="https://wa.me/972506007165?text=%D7%94%D7%99%D7%99%20%D7%90%D7%9C%D7%99%D7%A2%D7%96%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%91%D7%95%D7%98%20AI%20%D7%9C%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%99" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
