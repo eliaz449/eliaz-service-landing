@@ -317,7 +317,7 @@
 <!-- STATS -->
 <section class="py-20">
     <div class="container mx-auto px-4">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 text-center max-w-3xl mx-auto">
             <div class="card-glass p-6">
                 <div class="text-4xl font-black text-gradient mb-1">24/7</div>
                 <div class="text-sm" style="color: var(--text-dim);">זמינות ללקוחות שלך</div>
@@ -325,10 +325,6 @@
             <div class="card-glass p-6">
                 <div class="text-4xl font-black text-gradient mb-1">1:1</div>
                 <div class="text-sm" style="color: var(--text-dim);">עסק אחד = בוט מותאם אחד</div>
-            </div>
-            <div class="card-glass p-6">
-                <div class="text-4xl font-black text-gradient mb-1">2+</div>
-                <div class="text-sm" style="color: var(--text-dim);">מערכות AI כבר בפרודקשן</div>
             </div>
             <div class="card-glass p-6">
                 <div class="text-4xl font-black text-gradient mb-1">0</div>
@@ -376,8 +372,14 @@
         </div>
         <div class="grid md:grid-cols-2 gap-6">
             <div class="card-glass p-8">
-                <h3 class="font-bold text-xl mb-2">מיכל — בוט הלקוחות של משרד רו"ח</h3>
-                <p class="mb-2">בוט WhatsApp בשם "מיכל" שעונה בשם המשרד על פניות לקוחות, אוסף פרטים ומעביר פניות חמות ישירות לבעלת המשרד.</p>
+                <span class="tag-pill mb-4" style="background: rgba(34,197,94,.12); border-color: rgba(34,197,94,.35); color: #86efac;">🟢 בפרודקשן</span>
+                <h3 class="font-bold text-xl mb-2 mt-3">מיכל — בוט הלקוחות של משרד רו"ח</h3>
+                <ul class="space-y-1.5 mb-3 text-sm">
+                    <li>• עונה אוטומטית לכל פנייה נכנסת ב-WhatsApp, בשם המשרד</li>
+                    <li>• מזהה פניות דחופות ומעביר אותן מיידית לבעלת המשרד</li>
+                    <li>• אוסף פרטי לקוח ושומר אותם במקום מסודר, בלי הקלדה ידנית</li>
+                </ul>
+                <p class="text-sm mb-4" style="color: #93c5fd;">💰 <strong>הערך:</strong> חוסך למשרד שעות של מענה ידני כל שבוע, ומוודא שאף פנייה לא נופלת בין הכיסאות.</p>
                 <div class="mini-flow">
                     <span class="mini-node">💬<small>לקוח</small></span>
                     <span class="mini-arrow">←</span>
@@ -385,11 +387,16 @@
                     <span class="mini-arrow">←</span>
                     <span class="mini-node">✅<small>מענה</small></span>
                 </div>
-                <span class="tag-pill mt-5">בוט WhatsApp מותאם אישית</span>
             </div>
             <div class="card-glass p-8">
-                <h3 class="font-bold text-xl mb-2">מערכת ניהול צילומי שלטים</h3>
-                <p class="mb-2">מערכת שמנהלת ומעבדת צילומים ונתונים בזמן אמת מול Supabase, חוסכת עבודה ידנית של איסוף וסידור מידע.</p>
+                <span class="tag-pill mb-4" style="background: rgba(34,197,94,.12); border-color: rgba(34,197,94,.35); color: #86efac;">🟢 בפרודקשן</span>
+                <h3 class="font-bold text-xl mb-2 mt-3">מערכת ניהול צילומי שלטים</h3>
+                <ul class="space-y-1.5 mb-3 text-sm">
+                    <li>• מקבלת צילומים מהשטח ומעבדת אותם אוטומטית מול Supabase</li>
+                    <li>• מסדרת ומתייגת את המידע בזמן אמת, בלי הזנה ידנית</li>
+                    <li>• שומרת הכל במקום אחד, נגיש ומעודכן לכל הצוות</li>
+                </ul>
+                <p class="text-sm mb-4" style="color: #93c5fd;">💰 <strong>הערך:</strong> הופך תהליך שלקח שעות של סידור ידני לתהליך שרץ לבד ברקע.</p>
                 <div class="mini-flow">
                     <span class="mini-node">📸<small>צילום</small></span>
                     <span class="mini-arrow">←</span>
@@ -397,7 +404,47 @@
                     <span class="mini-arrow">←</span>
                     <span class="mini-node">🗂️<small>נשמר</small></span>
                 </div>
-                <span class="tag-pill mt-5">אוטומציה + ניהול נתונים</span>
+            </div>
+        </div>
+
+        <div class="text-center mt-16 mb-10">
+            <span class="eyebrow">MORE DIRECTIONS</span>
+            <h3 class="text-2xl md:text-3xl font-bold mt-3">עוד דוגמאות לכיוונים אפשריים</h3>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="card-glass p-8">
+                <span class="tag-pill mb-4">💡 דוגמת קונספט</span>
+                <h3 class="font-bold text-xl mb-2 mt-3">בוט לעסק שיפוצים</h3>
+                <ul class="space-y-1.5 mb-3 text-sm">
+                    <li>• עונה ללקוחות פוטנציאליים באותו רגע — גם ב-11 בלילה</li>
+                    <li>• שואל את השאלות הנכונות (סוג עבודה, גודל, תקציב משוער) לפני שמעביר ליד</li>
+                    <li>• קובע ביקור או הערכת מחיר ביומן, בלי שיחת טלפון מקדימה</li>
+                </ul>
+                <p class="text-sm mb-4" style="color: #93c5fd;">⚡ <strong>הערך:</strong> כל שיחה שלא מוחמצת = לקוח שלא עבר למתחרה. חוסך זמן סינון וממקד רק בפניות חמות באמת.</p>
+                <div class="mini-flow">
+                    <span class="mini-node">💬<small>פנייה</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">🤖<small>מיון</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">🔥<small>ליד חם</small></span>
+                </div>
+            </div>
+            <div class="card-glass p-8">
+                <span class="tag-pill mb-4">💡 דוגמת קונספט</span>
+                <h3 class="font-bold text-xl mb-2 mt-3">בוט לארגון שידוכים</h3>
+                <ul class="space-y-1.5 mb-3 text-sm">
+                    <li>• אוסף פרטי מועמדים ומעדכן פרופיל בצורה מסודרת</li>
+                    <li>• עונה 24/7 על שאלות נפוצות של פונים חדשים</li>
+                    <li>• מעביר לשדכן/ית רק את הפניות שדורשות שיקול דעת אנושי</li>
+                </ul>
+                <p class="text-sm mb-4" style="color: #93c5fd;">⏱ <strong>הערך:</strong> חוסך שעות של סינון ומענה ידני, ומשאיר את הזמן למה שבאמת דורש מגע אישי.</p>
+                <div class="mini-flow">
+                    <span class="mini-node">💬<small>מועמד</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">🤖<small>איסוף</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">👤<small>שדכן/ית</small></span>
+                </div>
             </div>
         </div>
     </div>
