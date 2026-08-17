@@ -754,6 +754,16 @@ async function saveLead(name, phone, email) {
     } catch(e) {
         console.error('Supabase error:', e);
     }
+
+    try {
+        await fetch('/.netlify/functions/notify-lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, phone, email, source: 'launchflow-ai' })
+        });
+    } catch(e) {
+        console.error('Lead notification error:', e);
+    }
 }
 
 document.querySelectorAll('form').forEach(form => {
