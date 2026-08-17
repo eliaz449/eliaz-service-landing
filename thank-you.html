@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קיבלנו! נחזור אליך בקרוב | Launchflow</title>
+    <meta name="description" content="הפרטים התקבלו בהצלחה. צוות Launchflow יחזור אליך בהקדם.">
+    <meta name="robots" content="noindex">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=Rubik:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #05060b;
+            --bg-soft: #0a0d18;
+            --surface: rgba(255,255,255,0.04);
+            --surface-strong: rgba(255,255,255,0.07);
+            --border: rgba(255,255,255,0.10);
+            --text: #eef1fa;
+            --text-dim: #97a1c2;
+            --text-faint: #5c6489;
+            --accent: #6d8bff;
+            --accent2: #22d3ee;
+            --accent3: #a855f7;
+        }
+        * { box-sizing: border-box; }
+        html { background: var(--bg); }
+        body { font-family: 'Heebo', sans-serif; overflow-x: hidden; color: var(--text-dim); background: var(--bg); min-height: 100vh; }
+        h1,h2,h3,h4 { font-family: 'Rubik', sans-serif; color: var(--text); }
+
+        .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent2); }
+        .tag-pill { display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .9rem; border-radius: 999px; background: rgba(109,139,255,.12); border: 1px solid rgba(109,139,255,.3); color: #c3cdff; }
+        .text-gradient { background: linear-gradient(135deg, #a7b8ff, #22d3ee); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        .card-glass { background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(18px); border-radius: 20px; }
+
+        .btn-primary { background: linear-gradient(135deg, #7c9bff, #22d3ee); color: #05060b; font-weight: 800; transition: all .25s ease; box-shadow: 0 1px 0 0 rgba(255,255,255,.4) inset, 0 14px 34px -12px rgba(109,139,255,.65); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 1px 0 0 rgba(255,255,255,.5) inset, 0 20px 44px -10px rgba(109,139,255,.8); }
+        .btn-ghost { border: 1px solid var(--border); color: var(--text); background: rgba(255,255,255,.02); transition: all .25s ease; }
+        .btn-ghost:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.25); }
+
+        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; left: 30px; background: #25d366; color: #fff; border-radius: 50px; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 100; transition: transform .3s; text-decoration: none; animation: wapulse 2.6s infinite; }
+        .whatsapp-float:hover { transform: scale(1.08); }
+        @keyframes wapulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); } 70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+
+        .blob { position: absolute; filter: blur(70px); z-index: 0; mix-blend-mode: screen; }
+
+        .grid-overlay { position: absolute; inset: 0; z-index: 0; opacity: .5;
+            background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size: 44px 44px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 90%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 90%);
+        }
+
+        .pulse-ring { transform-box: fill-box; transform-origin: 50% 50%; animation: pulsering 2.6s ease-out infinite; }
+        @keyframes pulsering { 0% { opacity: .55; transform: scale(.92); } 100% { opacity: 0; transform: scale(1.6); } }
+
+        .step-track { display: flex; align-items: center; justify-content: center; margin: 2.5rem 0 3rem; }
+        .step-node { width: 42px; height: 42px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-family: 'JetBrains Mono', monospace; background: var(--bg-soft); border: 1.5px solid var(--accent); color: #cdd7ff; box-shadow: 0 0 24px -4px rgba(109,139,255,.6); flex-shrink: 0; font-size: .9rem; }
+        .step-line { flex: 1 1 auto; height: 2px; background: linear-gradient(90deg, #6d8bff, #22d3ee); background-size: 200% 100%; animation: linemove 2.5s linear infinite; min-width: 20px; max-width: 100px; margin: 0 .4rem; opacity: .8; }
+        @keyframes linemove { to { background-position: -200% 0; } }
+    </style>
+</head>
+<body class="antialiased">
+
+<section class="relative min-h-screen flex items-center py-16 overflow-hidden" style="background: radial-gradient(ellipse 80% 60% at 50% -10%, #171d3d 0%, var(--bg) 60%);">
+    <div class="grid-overlay"></div>
+    <div class="blob w-96 h-96 rounded-full -top-20 -right-20" style="background: #4f5bd5; opacity:.35;"></div>
+    <div class="blob w-96 h-96 rounded-full top-40 -left-32" style="background: #0ea5c9; opacity:.3;"></div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-xl mx-auto text-center">
+
+            <div class="relative inline-flex items-center justify-center mb-8" style="width:96px;height:96px;">
+                <svg viewBox="0 0 96 96" class="absolute inset-0" width="96" height="96">
+                    <circle class="pulse-ring" cx="48" cy="48" r="40" fill="none" stroke="#22d3ee" stroke-width="1.5"/>
+                    <circle cx="48" cy="48" r="40" fill="url(#okGrad)"/>
+                    <defs>
+                        <radialGradient id="okGrad" cx="35%" cy="30%" r="75%">
+                            <stop offset="0%" stop-color="#7be0c9"/>
+                            <stop offset="55%" stop-color="#22c48f"/>
+                            <stop offset="100%" stop-color="#0f8f68"/>
+                        </radialGradient>
+                    </defs>
+                    <path d="M32,50 L43,61 L66,36" fill="none" stroke="#05060b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <span class="tag-pill eyebrow">✓ REQUEST RECEIVED</span>
+            <h1 class="text-3xl md:text-5xl font-black mt-5 mb-5 leading-tight">
+                קיבלנו! <span class="text-gradient">חוזרים אליך בקרוב</span>
+            </h1>
+            <p class="text-lg max-w-md mx-auto">הפרטים שלך התקבלו אצלנו. נחזור אליך תוך שעה בימי עבודה, לשיחת התאמה קצרה — בלי התחייבות.</p>
+
+            <div class="step-track max-w-sm mx-auto">
+                <div class="step-node">1</div>
+                <div class="step-line"></div>
+                <div class="step-node">2</div>
+                <div class="step-line"></div>
+                <div class="step-node">3</div>
+            </div>
+            <div class="grid grid-cols-3 gap-3 text-sm mb-12 max-w-lg mx-auto -mt-8">
+                <div style="color: var(--text-dim);">בודקים את הפנייה</div>
+                <div style="color: var(--text-dim);">קובעים שיחה קצרה</div>
+                <div style="color: var(--text-dim);">מתחילים לבנות</div>
+            </div>
+
+            <div class="card-glass p-8" style="border-color: rgba(109,139,255,.3);">
+                <p class="font-bold text-lg mb-1" style="color: var(--text);">רוצה לזרז את זה?</p>
+                <p class="mb-5 text-sm">דבר איתנו עכשיו בוואטסאפ — לפעמים זה הכי מהיר</p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a href="https://wa.me/972506007165?text=%D7%94%D7%99%D7%99%2C%20%D7%94%D7%A9%D7%90%D7%A8%D7%AA%D7%99%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%91%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%94%D7%9E%D7%A9%D7%99%D7%9A" target="_blank" rel="noopener noreferrer" class="btn-primary px-6 py-3.5 rounded-full">💬 דבר איתנו בוואטסאפ</a>
+                    <a href="index.html" class="btn-ghost px-6 py-3.5 rounded-full">חזרה לעמוד הבית</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<a href="https://wa.me/972506007165?text=%D7%94%D7%99%D7%99%2C%20%D7%94%D7%A9%D7%90%D7%A8%D7%AA%D7%99%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%91%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%94%D7%9E%D7%A9%D7%99%D7%9A" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+</a>
+
+</body>
+</html>
