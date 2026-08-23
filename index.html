@@ -739,6 +739,10 @@
 const SUPABASE_URL = 'https://mjthsjjcsioqsohlqzxk.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qdGhzampjc2lvcXNvaGxxenhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwNjc3NTAsImV4cCI6MjA5MzY0Mzc1MH0.fkg7sJ6CaPVOBHxEEWet1UJ2V9WcMGWA-bs4nuG9pMQ';
 
+// Email notification to the business owner is triggered server-side by a
+// Postgres trigger on this table (see notify_lead_webhook / trg_notify_lead
+// in the mjthsjjcsioqsohlqzxk Supabase project) — it fires directly off the
+// INSERT below, so it can never depend on which JS a visitor's browser loaded.
 async function saveLead(name, phone, email) {
     try {
         await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
@@ -753,16 +757,6 @@ async function saveLead(name, phone, email) {
         });
     } catch(e) {
         console.error('Supabase error:', e);
-    }
-
-    try {
-        await fetch('/.netlify/functions/notify-lead', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, phone, email, source: 'launchflow-ai' })
-        });
-    } catch(e) {
-        console.error('Lead notification error:', e);
     }
 }
 
