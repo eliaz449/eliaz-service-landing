@@ -43,9 +43,19 @@
         .form-input::placeholder { color: var(--text-faint); }
         .form-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(109,139,255,.22); }
 
-        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; left: 30px; background: #25d366; color: #fff; border-radius: 50px; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 100; transition: transform .3s; text-decoration: none; animation: wapulse 2.6s infinite; }
+        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 30px; left: 30px; background: #25d366; color: #fff; border-radius: 50px; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 100; transition: transform .3s; text-decoration: none; animation: wapulse 2.6s infinite; border: none; cursor: pointer; padding: 0; }
         .whatsapp-float:hover { transform: scale(1.08); }
         @keyframes wapulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); } 70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+
+        .wa-popover { position: fixed; bottom: 168px; left: 30px; width: 270px; z-index: 101; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 16px; padding: 1.1rem; box-shadow: 0 20px 50px -12px rgba(0,0,0,.6); }
+        .wa-popover[hidden] { display: none; }
+        .wa-popover-head { display: flex; align-items: center; justify-content: space-between; font-weight: 800; color: var(--text); margin-bottom: .3rem; }
+        .wa-popover-head button { background: none; border: none; color: var(--text-faint); font-size: .9rem; cursor: pointer; padding: .2rem; }
+        .wa-popover-sub { font-size: .8rem; color: var(--text-dim); margin: 0 0 .8rem; }
+        .wa-popover-options { display: flex; flex-direction: column; gap: .5rem; }
+        .wa-option { text-align: right; font-family: 'Heebo', sans-serif; font-size: .85rem; padding: .65rem .8rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(255,255,255,.03); color: var(--text); cursor: pointer; transition: all .2s; }
+        .wa-option:hover { border-color: #25d366; background: rgba(37,211,102,.1); }
+        @media (max-width: 380px) { .wa-popover { width: calc(100vw - 60px); left: 20px; } }
 
         .call-float { position: fixed; width: 60px; height: 60px; bottom: 100px; left: 30px; background: linear-gradient(135deg, #7c9bff, #22d3ee); color: #05060b; border-radius: 50px; display: flex; align-items: center; justify-content: center; z-index: 100; transition: transform .3s; text-decoration: none; box-shadow: 0 10px 26px -8px rgba(109,139,255,.65); }
         .call-float:hover { transform: scale(1.08); }
@@ -391,7 +401,7 @@
             <div class="card-glass p-8">
                 <div class="icon-badge mb-5">🤖</div>
                 <h3 class="font-bold text-xl mb-3">סוכן AI מותאם אישית</h3>
-                <p>אוטומציה שמבצעת עבורך משימות בפועל — לא רק שיחה. מיון פניות, ניהול נתונים, דוחות, מעקב אחרי תהליכים חוזרים.</p>
+                <p>לא רק ללקוחות. כל תהליך שחוזר על עצמו אצלכם — גבייה, מלאי, דוחות, תיאום צוות — יכול לרוץ לבד. <span class="text-gradient">אם זה חוזר על עצמו, אפשר להפוך אותו לאוטומטי.</span></p>
             </div>
             <div class="card-glass p-8">
                 <div class="icon-badge mb-5">🌐</div>
@@ -480,6 +490,124 @@
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- BEYOND CUSTOMER SERVICE -->
+<section id="beyond" class="py-24">
+    <div class="container mx-auto px-4 max-w-6xl">
+        <div class="text-center mb-14">
+            <span class="eyebrow">ANY REPEATING TASK</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-3">לא רק ללקוחות. <span class="text-gradient">כל תהליך שחוזר על עצמו</span></h2>
+            <p class="max-w-2xl mx-auto">עסק קטן, ארגון, עמותה, מוסד חינוכי — אם משהו קורה אצלכם שוב ושוב, יש סיכוי טוב שאפשר להפוך אותו לאוטומטי. בלי לגייס עוד עובד, בלי לשלם על עוד שעות עבודה על אותו הדבר.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="card-glass p-8">
+                <span class="tag-pill mb-4">💡 דוגמת קונספט</span>
+                <h3 class="font-bold text-xl mb-2 mt-3">גבייה ותזכורות תשלום</h3>
+                <ul class="space-y-1.5 mb-3 text-sm">
+                    <li>• שולח תזכורת ללקוח שחייב תשלום, בלי שאתה צריך לזכור</li>
+                    <li>• עוקב מי שילם ומי לא, ומעדכן את עצמו אוטומטית</li>
+                    <li>• מסלים בעדינות רק כשתשלום מתעכב יותר מדי</li>
+                </ul>
+                <p class="text-sm mb-4" style="color: #93c5fd;">💰 <strong>הערך:</strong> חוסך שעות מעקב כל חודש, ומקצר את הזמן עד שהכסף נכנס.</p>
+                <div class="mini-flow">
+                    <span class="mini-node">📋<small>חוב פתוח</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">🤖<small>תזכורת</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">💳<small>שולם</small></span>
+                </div>
+            </div>
+            <div class="card-glass p-8">
+                <span class="tag-pill mb-4">💡 דוגמת קונספט</span>
+                <h3 class="font-bold text-xl mb-2 mt-3">ניהול מלאי אוטומטי</h3>
+                <ul class="space-y-1.5 mb-3 text-sm">
+                    <li>• עוקב אחרי כמויות מלאי בזמן אמת</li>
+                    <li>• מתריע כשמשהו עומד להיגמר, לפני שזה בעיה</li>
+                    <li>• יכול גם להזמין אוטומטית מהספק הקבוע</li>
+                </ul>
+                <p class="text-sm mb-4" style="color: #93c5fd;">⏱ <strong>הערך:</strong> מייתר ספירות ידניות שחוזרות כל שבוע, ומונע מלאי חסר.</p>
+                <div class="mini-flow">
+                    <span class="mini-node">📦<small>מלאי</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">🤖<small>בדיקה</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">🛒<small>הזמנה</small></span>
+                </div>
+            </div>
+            <div class="card-glass p-8">
+                <span class="tag-pill mb-4">💡 דוגמת קונספט</span>
+                <h3 class="font-bold text-xl mb-2 mt-3">דוח שבועי מרוכז</h3>
+                <ul class="space-y-1.5 mb-3 text-sm">
+                    <li>• אוסף נתונים ממספר מקורות (Sheets, CRM, וואטסאפ) למקום אחד</li>
+                    <li>• מרכיב דוח מסודר כל שבוע, בלי שמישהו יושב ומעתיק ידנית</li>
+                    <li>• מדגיש רק את מה שבאמת דורש תשומת לב</li>
+                </ul>
+                <p class="text-sm mb-4" style="color: #93c5fd;">💰 <strong>הערך:</strong> חוסך שעה־שעתיים של ריכוז נתונים ידני, כל שבוע מחדש.</p>
+                <div class="mini-flow">
+                    <span class="mini-node">📊<small>מקורות</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">🤖<small>ריכוז</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">📩<small>דוח</small></span>
+                </div>
+            </div>
+            <div class="card-glass p-8">
+                <span class="tag-pill mb-4">💡 דוגמת קונספט</span>
+                <h3 class="font-bold text-xl mb-2 mt-3">ניהול תרומות לעמותה</h3>
+                <ul class="space-y-1.5 mb-3 text-sm">
+                    <li>• מתעד תרומה נכנסת ומפיק קבלה אוטומטית</li>
+                    <li>• שולח תזכורת עדינה על התחייבות שטרם שולמה</li>
+                    <li>• שומר את כל ההיסטוריה מסודרת לגזבר</li>
+                </ul>
+                <p class="text-sm mb-4" style="color: #93c5fd;">⚡ <strong>הערך:</strong> מייתר עבודה מתסכלת שחוזרת על עצמה בכל תרומה, ומאפשר לנהל היקף גדול יותר בלי כוח אדם נוסף.</p>
+                <div class="mini-flow">
+                    <span class="mini-node">🙏<small>תרומה</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">🤖<small>קבלה</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">📁<small>תיעוד</small></span>
+                </div>
+            </div>
+            <div class="card-glass p-8">
+                <span class="tag-pill mb-4">💡 דוגמת קונספט</span>
+                <h3 class="font-bold text-xl mb-2 mt-3">תיאום מתנדבים</h3>
+                <ul class="space-y-1.5 mb-3 text-sm">
+                    <li>• אוסף זמינות מתנדבים אוטומטית מהודעה בקבוצה</li>
+                    <li>• משבץ לפי הצורך בזמן אמת</li>
+                    <li>• שולח תזכורת יום לפני, בלי מעקב טלפוני</li>
+                </ul>
+                <p class="text-sm mb-4" style="color: #93c5fd;">💰 <strong>הערך:</strong> מאפשר לתאם הרבה יותר מתנדבים בלי לגייס עוד רכז לתפקיד.</p>
+                <div class="mini-flow">
+                    <span class="mini-node">🙋<small>זמינות</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">🤖<small>שיבוץ</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">📅<small>תזכורת</small></span>
+                </div>
+            </div>
+            <div class="card-glass p-8">
+                <span class="tag-pill mb-4">💡 דוגמת קונספט</span>
+                <h3 class="font-bold text-xl mb-2 mt-3">הרשמה למוסד חינוכי</h3>
+                <ul class="space-y-1.5 mb-3 text-sm">
+                    <li>• אוסף טפסי הרשמה ומסמכים חסרים אוטומטית</li>
+                    <li>• שולח תזכורת רק למי שבאמת חסר לו משהו</li>
+                    <li>• מעדכן את המזכירות רק כשצריך התערבות אנושית</li>
+                </ul>
+                <p class="text-sm mb-4" style="color: #93c5fd;">⏱ <strong>הערך:</strong> חוסך למזכירות שעות של מעקב טלפוני בכל עונת הרשמה.</p>
+                <div class="mini-flow">
+                    <span class="mini-node">📝<small>הרשמה</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">🤖<small>מעקב</small></span>
+                    <span class="mini-arrow">←</span>
+                    <span class="mini-node">✅<small>הושלם</small></span>
+                </div>
+            </div>
+        </div>
+        <p class="text-center mt-10">
+            <a href="#lead-form" class="btn-primary inline-block px-10 py-4 rounded-full text-lg">יש לך תהליך כזה? בואו נדבר</a>
+        </p>
     </div>
 </section>
 
@@ -611,12 +739,26 @@
     </svg>
 </a>
 
-<!-- WHATSAPP FLOAT -->
-<a href="https://wa.me/972506007165?text=%D7%94%D7%99%D7%99%20%D7%90%D7%9C%D7%99%D7%A2%D7%96%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%91%D7%95%D7%98%20AI%20%D7%9C%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%99" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+<!-- WHATSAPP FLOAT (opens a quick qualify step first, instead of a direct deep-link) -->
+<button type="button" id="waFloatBtn" class="whatsapp-float" aria-haspopup="true" aria-expanded="false" aria-label="דברו איתנו בוואטסאפ">
     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
-</a>
+</button>
+
+<div id="waPopover" class="wa-popover" hidden>
+    <div class="wa-popover-head">
+        <span>במה נוכל לעזור?</span>
+        <button type="button" id="waPopoverClose" aria-label="סגור">✕</button>
+    </div>
+    <p class="wa-popover-sub">בחרו נושא — ניפתח לכם וואטסאפ עם הודעה מוכנה</p>
+    <div class="wa-popover-options">
+        <button type="button" class="wa-option" data-msg="היי, אני מעוניין בבוט WhatsApp לעסק שלי">בוט WhatsApp לעסק</button>
+        <button type="button" class="wa-option" data-msg="היי, אני מעוניין בסוכן AI מותאם / אוטומציה לעסק שלי">סוכן AI מותאם / אוטומציה</button>
+        <button type="button" class="wa-option" data-msg="היי, אני מעוניין באתר עם צ'אטבוט חכם">אתר עם צ'אטבוט</button>
+        <button type="button" class="wa-option" data-msg="היי, יש לי שאלה כללית לגבי השירותים שלכם">משהו אחר / שאלה כללית</button>
+    </div>
+</div>
 
 <script>
 (function () {
@@ -734,6 +876,42 @@
     if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(handleResize);
     }
+})();
+
+(function () {
+    const WA_NUMBER = '972506007165';
+    const btn = document.getElementById('waFloatBtn');
+    const popover = document.getElementById('waPopover');
+    const closeBtn = document.getElementById('waPopoverClose');
+    if (!btn || !popover) return;
+
+    function openPopover() {
+        popover.hidden = false;
+        btn.setAttribute('aria-expanded', 'true');
+    }
+    function closePopover() {
+        popover.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', () => {
+        popover.hidden ? openPopover() : closePopover();
+    });
+    closeBtn.addEventListener('click', closePopover);
+
+    document.querySelectorAll('.wa-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+            const msg = encodeURIComponent(opt.dataset.msg);
+            window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank', 'noopener');
+            closePopover();
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!popover.hidden && !popover.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+            closePopover();
+        }
+    });
 })();
 
 const SUPABASE_URL = 'https://mjthsjjcsioqsohlqzxk.supabase.co';
